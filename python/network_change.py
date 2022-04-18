@@ -1,7 +1,7 @@
 import subprocess
 redconexion="Auna corporativo" # cambiar por la red correcta a conectar
 #print('Ingresa el SSID de la red a verificar:')
-red="Everywhere"
+red=" : Everywhere"
 inicio=312
 fin=(inicio+len(red))
 #print(fin)
