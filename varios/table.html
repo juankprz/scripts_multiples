@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla example</title>
+</head>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.4/css/select.dataTables.min.css">
+<body>
+    <table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th> <input  id = "all" type="checkbox">Seleccionar</th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+                <th>Causal</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td></td>
+                <td>Tiger Nixon</td>
+                <td>System Architect</td>
+                <td>Edinburgh</td>
+                <td>61</td>
+                <td>$320,800</td>
+                <td><input type="text" id="causal" name="causal" value="" required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Garrett Winters</td>
+                <td>Accountant</td>
+                <td>Tokyo</td>
+                <td>63</td>
+                <td>$170,750</td>
+                <td><input type="text" id="causal" name="causal" value=""  required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Ashton Cox</td>
+                <td>Junior Technical Author</td>
+                <td>San Francisco</td>
+                <td>66</td>
+                <td>$86,000</td>
+                <td><input type="text" id="causal" name="causal" value="" required></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>Cedric Kelly</td>
+                <td>Senior Javascript Developer</td>
+                <td>Edinburgh</td>
+                <td>22</td>
+                <td>$433,060</td>
+                <td><input type="text" id="causal" name="causal" value=""></td>
+            </tr>
+           
+        </tbody>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Office</th>
+                <th>Age</th>
+                <th>Salary</th>
+                <th>Causal</th>
+            </tr>
+        </tfoot>
+    </table>
+    <button id="Button">Data</button>
+</body>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/select/1.3.4/js/dataTables.select.min.js"></script>
+<script>
+    $(document).ready(function() {
+    let table=$('#example').DataTable( {
+        ordering:false,
+        language: {
+        "decimal": "",
+        "emptyTable": "No hay información",
+        "info": "Mostrando _START_ a _END_ de _TOTAL_ Facturas",
+        "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
+        "infoFiltered": "(Filtrado de _MAX_ total facturas)",
+        "infoPostFix": "",
+        "thousands": ",",
+        "lengthMenu": "Mostrar _MENU_ Facturas",
+        "loadingRecords": "Cargando...",
+        "processing": "Procesando...",
+        "search": "Buscar:",
+        "zeroRecords": "Sin resultados encontrados",
+        "paginate": {
+            "first": "Primero",
+            "last": "Ultimo",
+            "next": "Siguiente",
+            "previous": "Anterior"
+        },
+    "select": {
+    "rows": "%d Facturas seleccionadas"
+}
+     },
+        columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        }
+    } );
+    $('#Button').click( function () {
+        console.log(table.rows('.selected').data());
+        console.log( $(".selected > td > input ").serialize());
+        $(".selected > td > input ").attr("class","selected")
+        if($("input[class='selected'][2]").val()==""){
+            $("input[class='selected']").css("background-color", "red");
+
+        }
+       
+    } );
+    $('#all').change( function () {
+        if($(this).is(':checked')) {
+            table.rows().select().draw();
+    } else {
+        table.rows().deselect().draw();
+    }
+       
+       
+    } );
+} );
+</script>
+</html>
